@@ -24,4 +24,49 @@ namespace arenx::math_test
         }
     }
 
+    TEST(Math, getModularInverse_randomInput)
+    {
+
+        auto brutforce = [](int n, int prime) {
+            n %= prime;
+            int64_t m = prime / n * n;
+            while (m % prime != 1)
+            {
+                m += n;
+            }
+
+            return m / n;
+        };
+
+        auto isPrime = [](int n) {
+            for (int i = 2; i <= n / 2; ++i)
+            {
+                if (n % i == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        };
+
+        int count = 1000;
+
+        while (count-- > 0)
+        {
+
+            int n = 2 + (rand() % 1000);
+            int prime = n + 1 + (rand() % 100000);
+
+            while (!isPrime(prime))
+            {
+                prime = n + 1 + (rand() % 100000);
+            }
+
+            int expect = brutforce(n, prime);
+            int actual = getModularInverse(n, prime);
+
+            ASSERT_EQ(actual, expect) << "n=" << n << " prime=" << prime;
+        }
+    }
+
 } // namespace arenx::math_test
