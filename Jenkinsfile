@@ -27,21 +27,21 @@ pipeline {
             stages {
                 stage('cmake') {
                     steps {
-                        dir ('build') {
+                        dir ('cpp/build') {
                             sh "cmake .."
                         }
                     }
                 }
                 stage('make') {
                     steps {
-                        dir ('build') {
+                        dir ('cpp/build') {
                             sh "make"
                         }
                     }
                 }
                 stage('make test') {
                     steps {
-                        dir ('build') {
+                        dir ('cpp/build') {
                             sh "make test"
                         }
                     }
