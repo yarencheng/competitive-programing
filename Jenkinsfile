@@ -42,7 +42,7 @@ pipeline {
                 stage('make test') {
                     steps {
                         dir ('cpp/build') {
-                            sh "make test"
+                            sh "ctest --verbose"
                         }
                     }
                 }
